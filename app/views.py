@@ -21,3 +21,25 @@ def equijoins(request):
     
     d={'EMPOBJECTS':EMPOBJECTS}
     return render(request,'equijoins.html',d)
+
+
+def selfjoins(request):
+    empmgrobjects=Emp.objects.select_related('mgr').all()
+    empmgrobjects=Emp.objects.select_related('mgr').filter(sal__gte=2500)
+    empmgrobjects=Emp.objects.select_related('mgr').filter(mgr__ename='KING')
+    empmgrobjects=Emp.objects.select_related('mgr').filter(sal__lte=2000)
+    empmgrobjects=Emp.objects.select_related('mgr').filter(mgr__isnull=True)
+    empmgrobjects=Emp.objects.select_related('mgr').filter(mgr__isnull=False)
+    empmgrobjects=Emp.objects.select_related('mgr').filter(sal__lt=2000)
+    empmgrobjects=Emp.objects.select_related('mgr').filter(mgr__ename='KING',sal__gt=2000)
+    empmgrobjects=Emp.objects.select_related('mgr').filter(ename='JONES')
+    empmgrobjects=Emp.objects.select_related('mgr').filter(mgr__ename='BLAKE')
+    empmgrobjects=Emp.objects.select_related('mgr').filter(mgr__ename='ALLEN')
+    empmgrobjects=Emp.objects.select_related('mgr').filter(mgr__ename='KING',sal__gte=1500)
+    empmgrobjects=Emp.objects.select_related('mgr').filter(mgr__ename='BLAKE',sal__lte=1500)
+    empmgrobjects=Emp.objects.select_related('mgr').filter(mgr__ename='SCOTT')
+   
+
+    d={'empmgrobjects':empmgrobjects}
+    return render(request,'selfjoins.html',d)
+
